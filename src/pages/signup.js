@@ -1,7 +1,7 @@
 import React from 'react';
 
-const signup = (props) => {
-    
+const Signup = (props) => {
+
 }
 
-export default signup;
+export default Signup;
