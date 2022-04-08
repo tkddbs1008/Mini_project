@@ -5,8 +5,6 @@ import Posts from "../pages/Posts";
 import Signup from "../pages/signup";
 
 
-
-
 function App() {
   return (
     <div >
