@@ -1,0 +1,85 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Axios",
+            "content": "같이 axios 공부할사람",
+            "nickname": "sammy",
+            "group": {
+                "maxTeamOf": 4,
+                "curTeamCnt": 1
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "프론트"
+            }
+        },
+        {
+            "id": 2,
+            "title": "Javascript",
+            "content": "같이 자바스크립트 공부할사람",
+            "nickname": "daniel",
+            "group": {
+                "maxTeamOf": 3,
+                "curTeamCnt": 1
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "프론트"
+            }
+        },{
+            "id": 3,
+            "title": "api",
+            "content": "같이 api 공부할사람",
+            "nickname": "나비",
+            "group": {
+                "maxTeamOf": 4,
+                "curTeamCnt": 3
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "백앤드"
+            }
+        },{
+            "id": 4,
+            "title": "React",
+            "content": "같이 React 공부할사람",
+            "nickname": "고무줄",
+            "group": {
+                "maxTeamOf": 5,
+                "curTeamCnt": 2
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "프론트"
+            }
+        },{
+            "id": 5,
+            "title": "CRUD",
+            "content": "같이 CRUD 공부할사람",
+            "nickname": "admin",
+            "group": {
+                "maxTeamOf": 3,
+                "curTeamCnt": 1
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "프론트"
+            }
+        },{
+            "id": 6,
+            "title": "redux",
+            "content": "같이 redux 공부할사람",
+            "nickname": "moomin",
+            "group": {
+                "maxTeamOf": 4,
+                "curTeamCnt": 1
+            },
+            "createdAt": "2021.04.08",
+            "category": {
+                "name": "프론트"
+            }
+        }
+    ]
+}
+

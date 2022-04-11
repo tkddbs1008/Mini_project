@@ -8,12 +8,31 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
 const Post = (props) => {
-
     return (
         <Box sx={{ minWidth: 275, display: "flex", justifyContent: "center", m:1 }}>
-            <Posts variant="outlined">{card}</Posts>
-            <Posts variant="outlined">{card}</Posts>
-            <Posts variant="outlined">{card}</Posts>
+            <Posts variant="outlined">
+                <CardContent sx={{paddingBottom: "0px"}}>
+                    <Typography sx={{ fontSize: 24, display: "flex" }} gutterBottom>
+                        {props.title}
+                    </Typography>
+                    <Typography sx={{ float: "right" }} color="text.secondary">
+                        {props.createdAt}
+                        </Typography>
+                    <Typography>
+                        {props.content}
+                    </Typography>
+                    <Typography>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        그룹인원{props.group.curTeamCnt}/{props.group.maxTeamOf}
+                    </Typography>
+                    </CardContent>
+                    <CardActions sx={{float: "right" }}>
+                    <Button  size="small">참가하기</Button>
+                </CardActions>
+            </Posts>
         </Box>
     )
 
@@ -24,26 +43,5 @@ const Posts = styled(Card) ({
     width: "350px",
     height:"250px",
 })
-
-const card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        Word of the Day
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        adjective
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
-  </React.Fragment>
-);
 
 export default Post;

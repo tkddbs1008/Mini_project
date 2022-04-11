@@ -5,12 +5,23 @@ import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
 import mainpage from "../images/mainpage.png"
 import Post from '../components/Post';
+import {useDispatch, useSelector} from "react-redux"
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const Posts = (props) => {
+    const dispatch = useDispatch();
     const nav = useNavigate();
     const [front, setFront] = React.useState(false);
     const [back, setBack] = React.useState(false);
     const [misc, setMisc] = React.useState(false);
+    const post_list = useSelector((state) => state.post.list)
+    React.useEffect(() => {
+        dispatch(postActions.getPostFB());
+    }, [])
+
+    if(!post_list){
+        return;
+    }
 
     return (
         <div>
@@ -46,8 +57,16 @@ const Posts = (props) => {
             <div style={{width: "80%", height: "400px", display: "flex", margin: "auto", justifyContent: "center", marginTop: "10px"}}>
                 <img alt="main page" src={mainpage} />
             </div>
-            <div>
-                <Post />
+            <div style={{width: "80%", margin: "auto"}}>
+                <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
+                    {post_list.map((el, idx) => {
+                        return (
+                            <div key={el.id}>
+                                <Post {...el}/>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
             <div>
                 <Write onClick={() => nav('/write')}>+</Write>
