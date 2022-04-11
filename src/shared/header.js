@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {useNavigate} from 'react-router-dom'
+import logo from '../images/logo.png'
 
 
 const Header = (props) => {
@@ -12,7 +13,7 @@ const Header = (props) => {
     if(is_login){
         return (
             <div style={{width: "80%", height: "80px", margin: " 15px auto 0px auto", display: "flex", alignItems: "center"}}>
-                <h1 onClick={() => nav('/')}>로고</h1>
+                <img alt='logo' src={logo} onClick={() => nav('/')}  style={{width: "100px"}}/>
                 <div style={{marginLeft: "auto"}}>
                     <Stack direction="row" spacing={2} >
                         <b style={{fontSize: ".9rem", fontFamily: "Roboto", marginTop:"7px"}}>닉네임</b>
@@ -28,7 +29,7 @@ const Header = (props) => {
 
     return (
         <div style={{width: "80%", height: "80px", margin: " 15px auto 0px auto", display: "flex", alignItems: "center"}}>
-            <h1 onClick={() => nav('/')}>로고</h1>
+            <img alt='logo' src={logo} onClick={() => nav('/')} style={{width: "100px"}}/>
              <div style={{marginLeft: "auto"}}>
                 <Stack direction="row" spacing={2} >
                     <Button onClick={()=> nav('/login')} >로그인</Button>
