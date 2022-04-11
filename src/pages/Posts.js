@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
 import mainpage from "../images/mainpage.png"
+import Post from '../components/Post';
 
 const Posts = (props) => {
     const nav = useNavigate();
@@ -44,6 +45,9 @@ const Posts = (props) => {
             </div>
             <div style={{width: "80%", height: "400px", display: "flex", margin: "auto", justifyContent: "center", marginTop: "10px"}}>
                 <img alt="main page" src={mainpage} />
+            </div>
+            <div>
+                <Post />
             </div>
             <div>
                 <Write onClick={() => nav('/write')}>+</Write>
