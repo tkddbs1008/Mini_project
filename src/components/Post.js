@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //MUI
 import Card from '@mui/material/Card';
@@ -9,7 +10,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
+
 const Post = (props) => {
+    const nav = useNavigate();
     return (
         <Box sx={{ minWidth: 275, display: "flex", justifyContent: "center", m:1 }}>
             <Posts variant="outlined">
@@ -32,7 +35,7 @@ const Post = (props) => {
                     </Typography>
                     </CardContent>
                     <CardActions sx={{float: "right" }}>
-                    <Button  size="small">참가하기</Button>
+                    <Button onClick={() => nav(`/post/${props.id}`)}  size="small">참가하기</Button>
                 </CardActions>
             </Posts>
         </Box>
