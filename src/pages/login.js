@@ -26,8 +26,7 @@ const Login = (props) => {
     //     }
     // };
 
-    const login = (e) => {
-      e.preventDefault();
+    const loginClick = () => {
       dispatch(userActions.loginDB(id, pwd));
     }
 
@@ -42,7 +41,6 @@ const Login = (props) => {
             }}
             noValidate
             autoComplete="off"
-            onSubmit={login}
           >
             <Stack spacing={1}>
                 <h1 style={{textAlign: "center"}}>로그인</h1>
@@ -53,14 +51,12 @@ const Login = (props) => {
                   setPwd(e.target.value)
               } } id="standard-basic" label="PassWord" variant="standard" />
                 <br/>
-                <input type="submit" value="Submit" />
-              {/* <Button disabled={id === "" || pwd === "" ? true : false} onClick={() => {console.log("로그인 누름!!");loginClick();}} variant="outlined">로그인</Button> */}
+              <Button disabled={id === "" || pwd === "" ? true : false} onClick={() => {console.log("로그인 누름!!");loginClick();}} variant="outlined">로그인</Button>
             </Stack>
           </Box>
         </Container>
       </div>
     </div>
-    
   );
 };
 

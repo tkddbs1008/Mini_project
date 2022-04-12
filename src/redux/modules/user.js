@@ -1,5 +1,6 @@
 import {createAction, handleActions} from "redux-actions"
 import {produce} from "immer"
+import { setCookie, deleteCookie } from "../../shared/Cookie"
 import axios from 'axios'
 import { apis } from "../../shared/api"
 
@@ -48,7 +49,7 @@ const loginDB = (username, password) => {
 //reducer
 export default handleActions({
     [SET_USER]: (state, action) => produce(state, (draft) => {
-        // setCookie("is_login", "success");
+        setCookie("is_login", "success");
         draft.user = action.payload.user;
         draft.is_login = true;
     })

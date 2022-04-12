@@ -1,19 +1,19 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://',
+    baseURL: 'http://13.209.155.82',
     headers: {
         'content-type': 'application/json;charset=UTF-8',
 		accept: 'application/json,',
     },
 });
 
-//cookie?
-// api.interceptors.request.use(function (config) {
-// 	const accessToken = document.cookie.split('=')[1];
-// 	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
-// 	return config;
-// });
+// cookie?
+api.interceptors.request.use(function (config) {
+	const accessToken = document.cookie.split('=')[1];
+	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
+	return config;
+});
 
 
 export const apis = {
