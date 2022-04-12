@@ -4,10 +4,11 @@ import axios from 'axios'
 
 //action
 const GET_POST = "GET_POST"
-
+const ADD_POST = "ADD_POST"
 
 //action creators
 const getPost = createAction(GET_POST, (post_list) => ({post_list}));
+const addPost = createAction(ADD_POST, (post) => ({post}))
 
 //initialState
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
 }
 
 //middleware
-const getPostFB = () => {
+const getPostDB = () => {
     return function (dispatch, getState) {
         axios.get('http://localhost:3001/posts')
         .then(function (response) {
@@ -25,6 +26,16 @@ const getPostFB = () => {
         })
     }
 }
+
+const addPostDB = (post_data) => {
+    return function (dispatch, getState) {
+        axios.post('')
+        .then(function(response) {
+            dispatch(addPost(post_data))
+        })
+    }
+}
+
 
 
 //reducer
@@ -40,12 +51,15 @@ export default handleActions({
           }
         }, []);
     }),
+    [ADD_POST]: (state, action) => produce(state, (draft) => {
+        draft.list.unshift(action.payload.post);
+    })
 }, initialState
 );
 
 
 const actionCreators = {
-    getPostFB,
+    getPostDB,
 };
 
 export { actionCreators };

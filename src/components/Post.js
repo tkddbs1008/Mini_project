@@ -1,4 +1,6 @@
 import React from 'react';
+
+//MUI
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,7 +14,7 @@ const Post = (props) => {
         <Box sx={{ minWidth: 275, display: "flex", justifyContent: "center", m:1 }}>
             <Posts variant="outlined">
                 <CardContent sx={{paddingBottom: "0px"}}>
-                    <Typography sx={{ fontSize: 24, display: "flex" }} gutterBottom>
+                    <Typography sx={{ fontSize: 24, display: "flex"}} gutterBottom>
                         {props.title}
                     </Typography>
                     <Typography sx={{ float: "right" }} color="text.secondary">

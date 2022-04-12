@@ -1,4 +1,6 @@
 import React from 'react';
+
+//MUI
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,6 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { styled } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const PostWrite = (props) => {
 
@@ -34,6 +38,10 @@ const PostWrite = (props) => {
         setDate(newValue);
     };
 
+    const handleGroup = (event) => {
+        setGroup(event.target.value);
+     };
+
     const handleChange = (event) => {
         setCategory(event.target.value);
     };
@@ -41,6 +49,11 @@ const PostWrite = (props) => {
         setContent(event.target.value);
     };
     function submit () {
+        if(title === '' || content === '' || group === '' || category === '' ) {
+            return (
+                    alert("제목, 게시글, 모집인원수와 카테고리를 모두 입력해주세요")
+            )
+        }
         console.log({title: title, content: content, maxTeamOf: group, category: {name: category}});
     }
 
@@ -87,19 +100,28 @@ const PostWrite = (props) => {
                         onChange={handleContent}
                     />
                 </div>
-            <div style={{display: "flex" }}>
-                <div style={{border: "1px solid grey", borderRadius: "4px", width: "160px", alignItems: "center", display: "inline-flex", marginTop: "10px", padding: "8px"}}>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <div style={{border: "1px solid grey", borderRadius: "4px",  alignItems: "center",  width: "170px", display: "inline-flex", marginTop: "10px", padding: "0px", justifyContent: "center"}}>
                     <p style={{margin: "5px"}}>모집인원</p>
-                    <TextField
-                        sx={{width: "60px", mr: "5px"}}
-                        id="group-count"
-                        type="number"
-                        size="small"
-                        onChange={(e) => setGroup(e.target.value)}
-                    /> 명
-                </div>
-                <Submit onClick={submit} variant="outlined" endIcon={<SendIcon />}>
-                작성하기
+                   <FormControl sx={{ m: 1, minWidth: 50 }}>
+                        <Select
+                        value={group}
+                        onChange={handleGroup}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <p>명</p>
+                 </div>
+                 <Submit onClick={submit} variant="outlined" endIcon={<SendIcon />}>
+                    작성하기
                 </Submit>
             </div>
         </div>

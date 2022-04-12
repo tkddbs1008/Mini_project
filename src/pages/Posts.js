@@ -1,12 +1,22 @@
 import React from 'react';
+
+//redux
+import {useDispatch, useSelector} from "react-redux"
 import { useNavigate } from 'react-router-dom';
+import { actionCreators as postActions } from '../redux/modules/post';
+
+//MUI
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
+
+//Logo
 import mainpage from "../images/mainpage.png"
+
+//Component
 import Post from '../components/Post';
-import {useDispatch, useSelector} from "react-redux"
-import { actionCreators as postActions } from '../redux/modules/post';
+
+
 
 const Posts = (props) => {
     const dispatch = useDispatch();
@@ -16,7 +26,7 @@ const Posts = (props) => {
     const [misc, setMisc] = React.useState(false);
     const post_list = useSelector((state) => state.post.list)
     React.useEffect(() => {
-        dispatch(postActions.getPostFB());
+        dispatch(postActions.getPostDB());
     }, [])
 
     if(!post_list){
@@ -93,11 +103,11 @@ const Write = styled(Button) ({
     right: "20px",
     borderRadius: "35px",
     zIndex: "3",
-    '&:hover': {
-        borderColor: 'black',
-        background: "black",
-        color: "white",
-        boxShadow: 'none',
+        '&:hover': {
+    borderColor: 'black',
+    background: "black",
+    color: "white",
+    boxShadow: 'none',
     },
 })
 

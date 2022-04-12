@@ -1,4 +1,10 @@
 import React from 'react';
+
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
+
+//MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
@@ -13,23 +19,24 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { styled } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 
+
 const Signup = (props) => {
-
-
+  const isLogin = useSelector((store) => store.user.is_login)
+  const dispatch = useDispatch();
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
   });
   const [valueChek, setValueChek] = React.useState(null);
   const [id, setid] = React.useState('')
-  const [username, setUserName] = React.useState('')
+  const [nickname, setNickName] = React.useState('')
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
   const Change = (event) => {
-    setUserName(event.target.value);
+    setNickName(event.target.value);
   };
 
   const passwordCheck = (event) => {
@@ -48,7 +55,7 @@ const Signup = (props) => {
   };
 
   function signUp(){
-    console.log({username: id, nickname: username, password: valueChek});
+    dispatch(userActions.registerDB(id, nickname, valueChek))
   }
 
   if(id === 'close'){
@@ -111,7 +118,7 @@ const Signup = (props) => {
                 />
                 </FormControl>
             </Box>
-               {(values.password === valueChek) && id !== '' && username !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
+               {(values.password === valueChek) && id !== '' && nickname !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
         </div>
     )
   }
@@ -176,7 +183,7 @@ const Signup = (props) => {
                 />
                 </FormControl>
             </Box>
-               {(values.password === valueChek) && id !== '' && username !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
+               {(values.password === valueChek) && id !== '' && nickname !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
         </div>
     )
   }
@@ -243,7 +250,7 @@ const Signup = (props) => {
                 />
                 </FormControl>
             </Box>
-               {(values.password === valueChek) && id !== '' && username !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
+               {(values.password === valueChek) && id !== '' && nickname !== '' ? <SignUp variant="outlined" onClick={signUp}>가입하기</SignUp> : <SignUp disabled variant="outlined">가입하기</SignUp>}
         </div>
     )
 }
