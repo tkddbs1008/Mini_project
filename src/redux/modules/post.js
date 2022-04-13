@@ -1,7 +1,8 @@
 import {createAction, handleActions} from "redux-actions"
 import {produce} from "immer"
-import axios from 'axios'
 import { apis } from "../../shared/api"
+import history from "../.."
+
 
 //action
 const GET_POST = "GET_POST"
@@ -14,27 +15,43 @@ const addPost = createAction(ADD_POST, (post) => ({post}))
 //initialState
 const initialState = {
     list: [],
-
 }
+
 
 //middleware
 const getPostDB = () => {
-     return function (dispatch, getState) {
-        return;
+     return async function (dispatch, getState) {
+            try {
+			const { data } = await apis.posts();
+			dispatch(getPost(data));
+        } catch {
+            console.log("불러올수 없어요")
         }
-    }
-
-
-
-const addPostDB = (post_data) => {
-    return function (dispatch, getState) {
-        axios.post('')
-        .then(function(response) {
-            dispatch(addPost(post_data))
-        })
     }
 }
 
+const addPostDB = (contents) => {
+    return function (dispatch, getState) {
+        console.log(contents)
+        apis
+                        .add(contents)
+                        .then(() => {
+                                dispatch(addPost(contents));
+                                history.push('/')
+                        })
+                        .catch((err) => {
+                            window.alert('로그인한 회원만 작성할 수 있습니다')
+                            console.log(err)
+                        })
+    }
+}
+
+const joinPostDB = (postId, token) => {
+    return function (dispatch, getState) {
+        apis
+                    .join(postId, token)
+    }
+}
 
 
 //reducer
@@ -59,6 +76,8 @@ export default handleActions({
 
 const actionCreators = {
     getPostDB,
+    joinPostDB,
+    addPostDB,
 };
 
 export { actionCreators };

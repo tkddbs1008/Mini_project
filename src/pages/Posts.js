@@ -25,6 +25,8 @@ const Posts = (props) => {
     const [back, setBack] = React.useState(false);
     const [misc, setMisc] = React.useState(false);
     const post_list = useSelector((state) => state.post.list)
+    const is_login = useSelector((state) => state.user.is_login)
+
     React.useEffect(() => {
         dispatch(postActions.getPostDB());
     }, [])
@@ -79,11 +81,27 @@ const Posts = (props) => {
                 </div>
             </div>
             <div>
-                <Write onClick={() => nav('/write')}>+</Write>
+                {is_login ? <Write onClick={() => nav('/write')}>+</Write> : null}
             </div>
         </div>
     )
 };
+
+Posts.defaultProps = {
+    id: 1,
+            title: "Axios",
+            content: "같이 axios 공부할사람",
+            nickname: "sammy",
+            group: {
+                maxTeamOf: 4,
+                curTeamCnt: 1
+            },
+            createdAt: "2021.04.08",
+            category: {
+                name: "프론트"
+            }
+}
+
 
 const Category = styled(ToggleButton) ({
     border: "1px solid grey",

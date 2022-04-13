@@ -1,7 +1,6 @@
 import {createAction, handleActions} from "redux-actions"
 import {produce} from "immer"
 import { setCookie, deleteCookie } from "../../shared/Cookie"
-import axios from 'axios'
 import { apis } from "../../shared/api"
 import history from "../.."
 
@@ -25,10 +24,16 @@ const registerDB = (id, nickname, valueCheck) => {
         apis
                 .signup(id, nickname, valueCheck)
                 .then((res) => {
+                    if(res.data.ok){
                     history.replace("/login")
+                    }else{
+                        window.alert(res.data.message)
+                        return;
+                    }
                 })
                 .catch((err) => {
-                    window.alert('정보가 올바르지 않아요')
+                    // window.alert('응답이 없어요!')
+                    console.log(err)
                 });
         };
 };
@@ -38,8 +43,9 @@ const loginDB = (username, password) => {
         apis
                 .login(username, password)
                 .then((res) => {
-                    setCookie('token', res.data[1].token, 7);
-				    localStorage.setItem('username', res.data[0].username);
+                    const auth = res.headers.authorization.split(" ")[1]
+                    setCookie('token', auth, 3);
+				    localStorage.setItem('username', username);
                     dispatch(setUser({username: username}));
                     history.replace("/")
                 })
@@ -49,7 +55,7 @@ const loginDB = (username, password) => {
     };
 };
 
-const logOutDB = () => {
+const logOutDB = (username) => {
 	return function (dispatch, getState) {
 		deleteCookie('token');
 		localStorage.removeItem('username');
@@ -57,6 +63,7 @@ const logOutDB = () => {
 		history.replace('/login');
 	};
 };
+
 
 //reducer
 export default handleActions({

@@ -8,26 +8,29 @@ const api = axios.create({
     },
 });
 
+
 // cookie?
 api.interceptors.request.use(function (config) {
 	const accessToken = document.cookie.split('=')[1];
-	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
+	config.headers.common['Authorization'] = `Bearer ${accessToken}`;
 	return config;
 });
 
 
+
 export const apis = {
-	// article
+	// post
 	add: (contents) => api.post('/api/posts', contents),
 	edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 	del: (id) => api.delete(`api/articles/${id}`),
 	posts: () => api.get('/api/posts'),
 	article: (id) => api.get(`/api/articles/${id}`),
 	search: (value) => api.get(`/api/articles/search?query=${value}`),
+	join: (id, token) => api.put(`/api/posts/in/${id}`, token),
+
 
 	// comment
-	addComment: (id, content) =>
-		api.post(`/api/articles/${id}/comments`, { content }),
+	addComment: (id, content) => api.post(`/api/articles/${id}/comments`, { content }),
 	comments: (id) => api.get(`/api/articles/${id}/comments`),
 	delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
 	editComment: (id, coId, content) =>
@@ -41,7 +44,4 @@ export const apis = {
 			nickname: username,
 			password: valueCheck,
 		}),
-	userInfo: () => api.get(`/myinfo`),
-	userPassword: (pw) => api.post(`/myinfo`, pw),
-	userNewPassword: (pw) => api.put(`/myinfo`, pw),
 };

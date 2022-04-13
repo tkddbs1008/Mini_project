@@ -11,8 +11,12 @@ import SendIcon from '@mui/icons-material/Send';
 import { styled } from '@mui/material/styles';
 
 
-const PostWrite = (props) => {
+//redux
+import { useDispatch } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
 
+const PostWrite = (props) => {
+    const dispatch = useDispatch();
     const [category, setCategory] = React.useState('');
     const [group, setGroup] = React.useState('');
     const [content, setContent] = React.useState('');
@@ -53,7 +57,7 @@ const PostWrite = (props) => {
                     alert("제목, 게시글, 모집인원수와 카테고리를 모두 입력해주세요")
             )
         }
-        console.log({title: title, content: content, maxTeamOf: group, category: {name: category}});
+       dispatch(postActions.addPostDB({title: title, content: content, group: {maxTeamOf: group}, category: {name: category}}));
     }
 
     return (
