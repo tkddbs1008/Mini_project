@@ -1,6 +1,5 @@
 import React from "react";
 import {Route, Routes} from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
 
 import Header from "./header";
 
@@ -13,7 +12,7 @@ import Posts from "../pages/Posts";
 
 
 function App() {
-  const nav = useNavigate();
+
   return (
     <div >
       <Header/>
@@ -27,5 +26,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

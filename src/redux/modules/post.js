@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions"
 import {produce} from "immer"
 import axios from 'axios'
+import { apis } from "../../shared/api"
 
 //action
 const GET_POST = "GET_POST"
@@ -18,14 +19,12 @@ const initialState = {
 
 //middleware
 const getPostDB = () => {
-    return function (dispatch, getState) {
-        axios.get('http://localhost:3001/posts')
-        .then(function (response) {
-            console.log(response.data);
-            dispatch(getPost(response.data))
-        })
+     return function (dispatch, getState) {
+        return;
+        }
     }
-}
+
+
 
 const addPostDB = (post_data) => {
     return function (dispatch, getState) {
