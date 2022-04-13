@@ -18,10 +18,10 @@ api.interceptors.request.use(function (config) {
 
 export const apis = {
 	// article
-	add: (contents) => api.post('/api/articles', contents),
+	add: (contents) => api.post('/api/posts', contents),
 	edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 	del: (id) => api.delete(`api/articles/${id}`),
-	articles: () => api.get('/api/articles'),
+	posts: () => api.get('/api/posts'),
 	article: (id) => api.get(`/api/articles/${id}`),
 	search: (value) => api.get(`/api/articles/search?query=${value}`),
 
