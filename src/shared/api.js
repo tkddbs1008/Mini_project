@@ -21,20 +21,19 @@ api.interceptors.request.use(function (config) {
 export const apis = {
 	// post
 	add: (contents) => api.post('/api/posts', contents),
-	edit: (id, contents) => api.put(`api/articles/${id}`, contents),
-	del: (id) => api.delete(`api/articles/${id}`),
+	edit: (id, contents) => api.put(`api/posts/${id}`, contents),
+	del: (id) => api.delete(`api/posts/${id}`),
 	posts: () => api.get('/api/posts'),
-	article: (id) => api.get(`/api/articles/${id}`),
-	search: (value) => api.get(`/api/articles/search?query=${value}`),
-	join: (id, token) => api.put(`/api/posts/in/${id}`, token),
-
+	join: (id) => api.put(`/api/posts/in/${id}`),
+	leave: (id) => api.put(`/api/posts/out/${id}`),
+	filter: (category) => api.get(`/api/category/${category}`, category),
+	post: (id) => api.get(`/api/posts/${id}`, id),
 
 	// comment
-	addComment: (id, content) => api.post(`/api/articles/${id}/comments`, { content }),
-	comments: (id) => api.get(`/api/articles/${id}/comments`),
-	delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
-	editComment: (id, coId, content) =>
-		api.put(`/api/articles/${id}/comments/${coId}`, { content }),
+	addComment: (content) => api.post('/api/comments', content),
+	delComment: (commentId) => api.delete(`/api/comments/${commentId}`),
+	editComment: (content, commentId) =>
+		api.put(`/api/comments/${commentId}`, content),
 
 	// user
 	login: (id, pwd) => api.post('/user/login', { username: id, password: pwd }),
@@ -44,4 +43,5 @@ export const apis = {
 			nickname: username,
 			password: valueCheck,
 		}),
+	loginCheck: () => api.get('/api/isLogin'),
 };

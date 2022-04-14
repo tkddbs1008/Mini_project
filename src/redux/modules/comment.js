@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import { apis } from '../shared/api';
+import { apis } from '../../shared/api';
 
 // action
 const ADD = 'comment/ADD';
@@ -12,9 +12,16 @@ const addComment = createAction(ADD, (comment) => ({ comment }));
 const getComments = createAction(LOAD, (comment) => ({ comment }));
 const delComment = createAction(DELETE, (coId) => ({ coId }));
 const editComment = createAction(EDIT, (coId, newContent) => ({
-	coId,
-	newContent,
 }));
+
+//middleware
+const addCommentDB = (content) => {
+	console.log(content)
+	return async function (dispatch, getState) {
+		apis.addComment(content)
+		window.location.reload()
+	}
+}
 
 
 // initialState
@@ -23,3 +30,15 @@ const initialState = {
 	comments: [],
 };
 
+
+
+//reducer
+// export default handleActions({
+
+// })
+
+const actionCreators = {
+    addCommentDB,
+};
+
+export { actionCreators };

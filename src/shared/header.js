@@ -14,16 +14,19 @@ import Stack from '@mui/material/Stack';
 const Header = (props) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
+    const token = localStorage.username
     const is_login =  useSelector((state) => state.user.is_login)
-
-
-    if(is_login){
+    const nickname = useSelector((state) => state.user?.user?.nickname)
+    if(token && is_login){
         return (
             <div style={{width: "80%", height: "80px", margin: " 15px auto 0px auto", display: "flex", alignItems: "center"}}>
                 <img alt='logo' src={logo} onClick={() => nav('/')}  style={{width: "150px"}}/>
                 <div style={{marginLeft: "auto"}}>
                     <Stack direction="row" spacing={2} >
-                        <b style={{fontSize: ".9rem", fontFamily: "Roboto", marginTop:"7px"}}>닉네임</b>
+                        <span style={{fontSize: ".9rem", fontFamily: "Roboto", marginTop:"7px"}}>
+                            <b>{nickname}</b>
+                            님, 안녕하세요
+                        </span>
                         <Button onClick={() => dispatch(userActions.logOutDB())}>로그아웃</Button>
                     </Stack>
                 </div>

@@ -20,7 +20,6 @@ const PostWrite = (props) => {
     const [category, setCategory] = React.useState('');
     const [group, setGroup] = React.useState('');
     const [content, setContent] = React.useState('');
-    const [date, setDate] = React.useState(new Date());
     const [title, setTitle] = React.useState('');
 
      const Submit = styled(Button) ({
@@ -36,10 +35,6 @@ const PostWrite = (props) => {
         boxShadow: 'none',
         },
      })
-
-    const handleDate = (newValue) => {
-        setDate(newValue);
-    };
 
     const handleGroup = (event) => {
         setGroup(event.target.value);
@@ -57,7 +52,7 @@ const PostWrite = (props) => {
                     alert("제목, 게시글, 모집인원수와 카테고리를 모두 입력해주세요")
             )
         }
-       dispatch(postActions.addPostDB({title: title, content: content, group: {maxTeamOf: group}, category: {name: category}}));
+       dispatch(postActions.addPostDB({title: title, content: content, team: {maxTeamOf: group}, category: {name: category}}));
     }
 
     return (

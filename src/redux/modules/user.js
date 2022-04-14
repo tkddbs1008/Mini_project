@@ -13,8 +13,6 @@ const setUser = createAction(SET_USER, (user) => ({user}));
 const logOut = createAction(LOG_OUT, (user) => ({user}));
 
 const initialState = {
-	username: null,
-	nickname: null,
 	is_login: false,
 };
 
@@ -47,7 +45,7 @@ const loginDB = (username, password) => {
                     setCookie('token', auth, 3);
 				    localStorage.setItem('username', username);
                     dispatch(setUser({username: username}));
-                    history.replace("/")
+                    history.push('/')
                 })
                 .catch((err) => {
                     window.alert('없는 회원정보 입니다! 회원가입을 해주세요!')
@@ -55,9 +53,21 @@ const loginDB = (username, password) => {
     };
 };
 
-const logOutDB = (username) => {
+const loginCheckDB = () => {
+    return function (dispatch, getState) {
+        apis
+                .loginCheck()
+                .then((res) => {
+                    if(res.data.ok){
+                        dispatch(setUser({nickname: `${res.data.nickname}`}))
+                    }
+                });
+    };
+};
+
+const logOutDB = () => {
 	return function (dispatch, getState) {
-		deleteCookie('token');
+		deleteCookie("token");
 		localStorage.removeItem('username');
 		dispatch(logOut());
 		history.replace('/login');
@@ -83,6 +93,7 @@ const actionCreators = {
     registerDB,
     loginDB,
     logOutDB,
+    loginCheckDB,
 };
 
 export { actionCreators };

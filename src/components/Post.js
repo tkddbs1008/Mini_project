@@ -8,10 +8,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Post = (props) => {
+
+    const post_list = useSelector((state) => state.post.list)
+
+
     const nav = useNavigate();
+
+
     return (
         <Box sx={{ minWidth: 275, display: "flex", justifyContent: "center", m:1 }}>
             <Posts variant="outlined">
@@ -30,11 +37,11 @@ const Post = (props) => {
                         <br/>
                         <br/>
                         <br/>
-                        그룹인원{props.group.curTeamCnt}/{props.group.maxTeamOf}
+                        그룹인원{props.team.curTeamCnt}/{props.team.maxTeamOf}
                     </Typography>
                     </CardContent>
                     <CardActions sx={{float: "right" }}>
-                    <Button onClick={() => nav(`/post/${props.id}`)}  size="small">참가하기</Button>
+                    <Button onClick={() => nav(`/post/${props.id}`)}  size="small">들여다 보기</Button>
                 </CardActions>
             </Posts>
         </Box>

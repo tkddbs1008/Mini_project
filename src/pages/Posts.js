@@ -1,14 +1,18 @@
 import React from 'react';
 
+
 //redux
 import {useDispatch, useSelector} from "react-redux"
 import { useNavigate } from 'react-router-dom';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 //MUI
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
 
 //Logo
 import mainpage from "../images/mainpage.png"
@@ -21,14 +25,28 @@ import Post from '../components/Post';
 const Posts = (props) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
-    const [front, setFront] = React.useState(false);
-    const [back, setBack] = React.useState(false);
-    const [misc, setMisc] = React.useState(false);
     const post_list = useSelector((state) => state.post.list)
     const is_login = useSelector((state) => state.user.is_login)
 
+    const [Category, setFilter] = React.useState();
+
+    const handleFilter = (event, newFilter) => {
+        setFilter(newFilter)
+    };
+
+    console.log(is_login)
+
     React.useEffect(() => {
         dispatch(postActions.getPostDB());
+        if(Category === '프론트'){
+            dispatch(postActions.filterDB(Category))
+        }
+        if(Category === '백앤드'){
+            dispatch(postActions.filterDB(Category))
+        }
+        if(Category === '기타'){
+            dispatch(postActions.filterDB(Category))
+        }
     }, [])
 
     if(!post_list){
@@ -38,33 +56,21 @@ const Posts = (props) => {
     return (
         <div>
             <div style={{ width: "80%", display: "flex", margin: "auto", justifyContent: "center"}}>
-                <Category
-                    value="Front-end"
-                    selected={front}
-                    onChange={() => {
-                        setFront(!front);
-                    }}
-                >
-                    프론트
-                </Category>
-                <Category
-                    value="Back-end"
-                    selected={back}
-                    onChange={() => {
-                        setBack(!back);
-                    }}
-                >
-                    백앤드
-                </Category>
-                <Category
-                    value="Misc"
-                    selected={misc}
-                    onChange={() => {
-                        setMisc(!misc);
-                    }}
-                >
-                    기타
-                </Category>
+                <ToggleButtonGroup
+                    value={Category}
+                    exclusive
+                    onChange={handleFilter}
+                    >
+                    <ToggleButton value="프론트" >
+                        프론트 앤드
+                    </ToggleButton>
+                    <ToggleButton value="백앤드" >
+                        백앤드
+                    </ToggleButton>
+                    <ToggleButton value="기타" >
+                        기타
+                    </ToggleButton>
+                </ToggleButtonGroup>
             </div>
             <div style={{width: "80%", height: "400px", display: "flex", margin: "auto", justifyContent: "center", marginTop: "10px"}}>
                 <img alt="main page" src={mainpage} />
@@ -101,13 +107,6 @@ Posts.defaultProps = {
                 name: "프론트"
             }
 }
-
-
-const Category = styled(ToggleButton) ({
-    border: "1px solid grey",
-    borderRadius: "25px",
-    margin: "10px"
-})
 
 const Write = styled(Button) ({
     padding: "0px",
